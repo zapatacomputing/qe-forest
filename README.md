@@ -27,11 +27,11 @@ and then import in a specific step:
     template: template-1
     arguments:
       parameters:
-      - backend-specs: "{'module_name': 'qe.forest.simulator', 'function_name': 'ForestSimulator', 'device_name': 'wavefunction-simulator'}"
+      - backend-specs: "{'module_name': 'qeforest.simulator', 'function_name': 'ForestSimulator', 'device_name': 'wavefunction-simulator'}"
       - resources: [qe-forest]
 ```
 
-You can pass additional arguments, such as `n_samples`, as parameters in the `backend-specs` dictionary. 
+You can pass additional arguments, such as `n_samples`, as parameters in the `backend-specs` dictionary.
 
 ### Task
 
@@ -48,14 +48,14 @@ In order to use `QVM` the servers running `QVM` and `QUILC` must be started firs
             python3 python_script.py
 ```
 
-Then, in order to use backend in the python code we can either simply create an object:
+Then, in order to use backend in the python code you can either simply create an object:
 
 ```python
-from qe.forest import ForestSimulator
+from qeforest import ForestSimulator
 backend = ForestSimulator()
 ```
 
-or use `backend-specs` parameter to make our code work with other backends too:
+or use `backend-specs` parameter to make your code work with other backends too:
 
 ```python
 from zquantum.core.utils import create_object
