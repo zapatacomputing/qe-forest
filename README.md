@@ -66,3 +66,4 @@ backend = create_object(backend_specs)
 ## Development and contribution
 
 You can find the development guidelines in the [`z-quantum-core` repository](https://github.com/zapatacomputing/z-quantum-core).
+
