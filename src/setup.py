@@ -14,14 +14,14 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/zapatacomputing/qe-forest ",
-    packages=['qeforest'],
-    package_dir={'' : 'python'},
+    packages=["qeforest"],
+    package_dir={"": "python"},
     classifiers=(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ),
     install_requires=[
-        'z-quantum-core',
-        'forestopenfermion @ http://github.com/zapatacomputing/forest-openfermion/tarball/fast-op-conversion'
-    ]
+        "z-quantum-core",
+        "forestopenfermion @ http://github.com/zapatacomputing/forest-openfermion/tarball/fast-op-conversion",
+    ],
 )
