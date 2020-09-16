@@ -21,7 +21,7 @@ class ForestSimulator(QuantumSimulator):
         self.n_samples = n_samples
         self.device_name = device_name
 
-    def run_circuit_and_measure(self, circuit, **kwargs):
+    def run_circuit_and_measure(self, circuit,seed=42, **kwargs):
         """Run a circuit and measure a certain number of bitstrings. Note: the number
         of bitstrings measured is derived from self.n_samples
 
@@ -30,7 +30,7 @@ class ForestSimulator(QuantumSimulator):
         Returns:
             a list of bitstrings (a list of tuples)
         """
-        cxn = get_forest_connection(self.device_name)
+        cxn = get_forest_connection(self.device_name,seed=seed)
         bitstrings = cxn.run_and_measure(circuit.to_pyquil(), trials=self.n_samples)
         if isinstance(bitstrings, dict):
             bitstrings = np.vstack(bitstrings[q] for q in sorted(cxn.qubits())).T
@@ -82,7 +82,7 @@ class ForestSimulator(QuantumSimulator):
         return wavefunction
 
 
-def get_forest_connection(device_name):
+def get_forest_connection(device_name,seed=None):
     """Get a connection to a forest backend
 
     Args:
@@ -92,6 +92,7 @@ def get_forest_connection(device_name):
         A connection to either a pyquil simulator or a QPU
     """
     if device_name == "wavefunction-simulator":
-        return WavefunctionSimulator()
+        print('seed in forest:',seed)
+        return WavefunctionSimulator(random_seed=seed)
     else:
         return get_qc(device_name)
