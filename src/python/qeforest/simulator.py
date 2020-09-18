@@ -92,7 +92,6 @@ def get_forest_connection(device_name,seed=None):
         A connection to either a pyquil simulator or a QPU
     """
     if device_name == "wavefunction-simulator":
-        print('seed in forest:',seed)
         return WavefunctionSimulator(random_seed=seed)
     else:
         return get_qc(device_name)
