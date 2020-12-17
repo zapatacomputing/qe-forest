@@ -1,8 +1,7 @@
 import setuptools
 import os
 
-readme_path = os.path.join("..", "README.md")
-with open(readme_path, "r") as f:
+with open("README.md", "r") as f:
     long_description = f.read()
 
 setuptools.setup(
@@ -15,7 +14,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/zapatacomputing/qe-forest ",
     packages=["qeforest"],
-    package_dir={"": "python"},
+    package_dir={"": "src/python"},
     classifiers=(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
@@ -23,5 +22,6 @@ setuptools.setup(
     install_requires=[
         "z-quantum-core",
         "forestopenfermion @ http://github.com/zapatacomputing/forest-openfermion/tarball/fast-op-conversion",
+        "pyquil>=2.25.0"
     ],
 )
