@@ -21,7 +21,6 @@ setuptools.setup(
     ),
     install_requires=[
         "z-quantum-core",
-        "forestopenfermion @ http://github.com/zapatacomputing/forest-openfermion/tarball/fast-op-conversion",
         "pyquil==2.25.0",
     ],
 )
