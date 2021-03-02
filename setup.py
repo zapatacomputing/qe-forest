@@ -13,7 +13,9 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/zapatacomputing/qe-forest ",
-    packages=["qeforest"],
+    packages=setuptools.find_namespace_packages(
+        include=["qeforest.*"], where="src/python"
+    ),
     package_dir={"": "src/python"},
     classifiers=(
         "Programming Language :: Python :: 3",
