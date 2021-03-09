@@ -21,6 +21,6 @@ setuptools.setup(
     ),
     install_requires=[
         "z-quantum-core",
-        "pyquil==2.25.0",
+        "pyquil>=2.25.0",
     ],
 )
