@@ -77,6 +77,10 @@ class ForestSimulator(QuantumSimulator):
         bitstrings = [tuple(b) for b in bitstrings.tolist()]
         return Measurements(bitstrings)
 
+    @compatible_with_old_type(
+        old_type=OldCircuit,
+        translate_old_to_wip=new_circuit_from_old_circuit
+    )
     def get_exact_expectation_values(self, circuit, qubit_operator, **kwargs):
         self.number_of_jobs_run += 1
         self.number_of_circuits_run += 1
@@ -93,7 +97,7 @@ class ForestSimulator(QuantumSimulator):
 
         pauli_sum = qubitop_to_pyquilpauli(qubit_operator)
         expectation_values = np.real(
-            cxn.expectation(circuit.to_pyquil(), pauli_sum.terms)
+            cxn.expectation(export_to_pyquil(circuit), pauli_sum.terms)
         )
 
         if expectation_values.shape[0] != len(pauli_sum):
@@ -106,10 +110,14 @@ class ForestSimulator(QuantumSimulator):
             )
         return ExpectationValues(expectation_values)
 
+    @compatible_with_old_type(
+        old_type=OldCircuit,
+        translate_old_to_wip=new_circuit_from_old_circuit
+    )
     def get_wavefunction(self, circuit):
         super().get_wavefunction(circuit)
         cxn = get_forest_connection(self.device_name)
-        wavefunction = cxn.wavefunction(circuit.to_pyquil())
+        wavefunction = cxn.wavefunction(export_to_pyquil(circuit))
         return wavefunction
 
 
