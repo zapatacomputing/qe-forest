@@ -51,16 +51,15 @@ class ForestSimulator(QuantumSimulator):
         s.close()
 
     @compatible_with_old_type(
-        old_type=OldCircuit,
-        translate_old_to_wip=new_circuit_from_old_circuit
+        old_type=OldCircuit, translate_old_to_wip=new_circuit_from_old_circuit
     )
     def run_circuit_and_measure(self, circuit, n_samples=None, **kwargs):
         """Run a circuit and measure a certain number of bitstrings. Note: the number
         of bitstrings measured is derived from self.n_samples
 
         Args:
-            circuit (zquantum.core.circuit.Circuit): the circuit to prepare the state
-            n_samples (int): The number of samples to measure. If None, then the
+            circuit: the circuit to prepare the state
+            n_samples: The number of samples to measure. If None, then the
                 number of samples is taken from the n_samples attribute.
         Returns:
             a list of bitstrings (a list of tuples)
@@ -78,8 +77,7 @@ class ForestSimulator(QuantumSimulator):
         return Measurements(bitstrings)
 
     @compatible_with_old_type(
-        old_type=OldCircuit,
-        translate_old_to_wip=new_circuit_from_old_circuit
+        old_type=OldCircuit, translate_old_to_wip=new_circuit_from_old_circuit
     )
     def get_exact_expectation_values(self, circuit, qubit_operator, **kwargs):
         self.number_of_jobs_run += 1
@@ -111,8 +109,7 @@ class ForestSimulator(QuantumSimulator):
         return ExpectationValues(expectation_values)
 
     @compatible_with_old_type(
-        old_type=OldCircuit,
-        translate_old_to_wip=new_circuit_from_old_circuit
+        old_type=OldCircuit, translate_old_to_wip=new_circuit_from_old_circuit
     )
     def get_wavefunction(self, circuit):
         super().get_wavefunction(circuit)
@@ -121,11 +118,11 @@ class ForestSimulator(QuantumSimulator):
         return wavefunction
 
 
-def get_forest_connection(device_name):
+def get_forest_connection(device_name: str):
     """Get a connection to a forest backend
 
     Args:
-        device_name (string): the device to connect to
+        device_name: the device to connect to
 
     Returns:
         A connection to either a pyquil simulator or a QPU
