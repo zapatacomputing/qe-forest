@@ -23,4 +23,7 @@ setuptools.setup(
         "z-quantum-core",
         "pyquil>=2.25.0",
     ],
+    extras_require={
+        "dev": ["pytest"],
+    },
 )
