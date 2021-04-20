@@ -3,6 +3,7 @@ import os
 import numpy as np
 from zquantum.core.interfaces.backend import QuantumSimulator
 from zquantum.core.circuit import save_circuit
+from zquantum.core.circuit import Circuit as OldCircuit
 from zquantum.core.measurement import (
     load_wavefunction,
     load_expectation_values,
@@ -15,6 +16,8 @@ from zquantum.core.openfermion import qubitop_to_pyquilpauli
 from pyquil.api import WavefunctionSimulator, get_qc
 import subprocess
 import socket, errno
+from zquantum.core.wip.compatibility_tools import compatible_with_old_type
+from zquantum.core.wip.circuits import new_circuit_from_old_circuit, export_to_pyquil
 
 
 class ForestSimulator(QuantumSimulator):
@@ -47,6 +50,10 @@ class ForestSimulator(QuantumSimulator):
 
         s.close()
 
+    @compatible_with_old_type(
+        old_type=OldCircuit,
+        translate_old_to_wip=new_circuit_from_old_circuit
+    )
     def run_circuit_and_measure(self, circuit, n_samples=None, **kwargs):
         """Run a circuit and measure a certain number of bitstrings. Note: the number
         of bitstrings measured is derived from self.n_samples
@@ -62,7 +69,7 @@ class ForestSimulator(QuantumSimulator):
             n_samples = self.n_samples
         super().run_circuit_and_measure(circuit)
         cxn = get_forest_connection(self.device_name)
-        bitstrings = cxn.run_and_measure(circuit.to_pyquil(), trials=n_samples)
+        bitstrings = cxn.run_and_measure(export_to_pyquil(circuit), trials=n_samples)
         if isinstance(bitstrings, dict):
             bitstrings = np.vstack([bitstrings[q] for q in sorted(cxn.qubits())]).T
 
