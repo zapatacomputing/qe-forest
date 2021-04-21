@@ -77,7 +77,7 @@ class ForestSimulator(QuantumSimulator):
         self.number_of_jobs_run += 1
         self.number_of_circuits_run += 1
         if self.device_name != "wavefunction-simulator" or self.n_samples is not None:
-            raise Exception(
+            raise RuntimeError(
                 "To compute exact expectation values, (i) the device name must be "
                 "\"wavefunction-simulator\" and (ii) n_samples must be None. The device "
                 f"name is currently {self.device_name} and n_samples is {self.n_samples}."
