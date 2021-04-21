@@ -1,23 +1,24 @@
+import errno
 import os
+import socket
+import subprocess
 
 import numpy as np
-from zquantum.core.interfaces.backend import QuantumSimulator
-from zquantum.core.circuit import save_circuit
+from pyquil.api import WavefunctionSimulator, get_qc
 from zquantum.core.circuit import Circuit as OldCircuit
+from zquantum.core.circuit import save_circuit
+from zquantum.core.interfaces.backend import QuantumSimulator
 from zquantum.core.measurement import (
-    load_wavefunction,
-    load_expectation_values,
-    sample_from_wavefunction,
     ExpectationValues,
-    expectation_values_to_real,
     Measurements,
+    expectation_values_to_real,
+    load_expectation_values,
+    load_wavefunction,
+    sample_from_wavefunction,
 )
 from zquantum.core.openfermion import qubitop_to_pyquilpauli
-from pyquil.api import WavefunctionSimulator, get_qc
-import subprocess
-import socket, errno
+from zquantum.core.wip.circuits import export_to_pyquil, new_circuit_from_old_circuit
 from zquantum.core.wip.compatibility_tools import compatible_with_old_type
-from zquantum.core.wip.circuits import new_circuit_from_old_circuit, export_to_pyquil
 
 
 class ForestSimulator(QuantumSimulator):
