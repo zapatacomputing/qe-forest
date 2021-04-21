@@ -67,7 +67,6 @@ class ForestSimulator(QuantumSimulator):
         if isinstance(bitstrings, dict):
             bitstrings = np.vstack([bitstrings[q] for q in sorted(cxn.qubits())]).T
 
-        # Store the bitstrings as a list of tuples, with each tuple representing one bitstring
         bitstrings = [tuple(b) for b in bitstrings.tolist()]
         return Measurements(bitstrings)
 
@@ -79,8 +78,9 @@ class ForestSimulator(QuantumSimulator):
         self.number_of_circuits_run += 1
         if self.device_name != "wavefunction-simulator" or self.n_samples is not None:
             raise Exception(
-                f"""To compute exact expectation values, (i) the device name must be "wavefunction-simulator" and (ii) n_samples 
-                    must be None. The device name is currently {self.device_name} and n_samples is {self.n_samples}."""
+                "To compute exact expectation values, (i) the device name must be "
+                "\"wavefunction-simulator\" and (ii) n_samples must be None. The device "
+                f"name is currently {self.device_name} and n_samples is {self.n_samples}."
             )
         cxn = get_forest_connection(self.device_name)
 
@@ -96,9 +96,8 @@ class ForestSimulator(QuantumSimulator):
         if expectation_values.shape[0] != len(pauli_sum):
             raise (
                 RuntimeError(
-                    "Expected {} expectation values but received {}.".format(
-                        len(pauli_sum), expectation_values.shape[0]
-                    )
+                    f"Expected {len(pauli_sum)} expectation values but received "
+                    f"{expectation_values.shape[0]}."
                 )
             )
         return ExpectationValues(expectation_values)
