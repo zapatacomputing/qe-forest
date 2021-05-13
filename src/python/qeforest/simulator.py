@@ -18,11 +18,12 @@ from zquantum.core.wip.compatibility_tools import compatible_with_old_type
 class ForestSimulator(QuantumSimulator):
     supports_batching = False
 
-    def __init__(self, device_name, n_samples=None, nthreads=1):
+    def __init__(self, device_name, n_samples=None, seed=None, nthreads=1):
         super().__init__(n_samples)
         self.nthreads = nthreads
         self.n_samples = n_samples
         self.device_name = device_name
+        self.seed = seed
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -79,10 +80,10 @@ class ForestSimulator(QuantumSimulator):
         if self.device_name != "wavefunction-simulator" or self.n_samples is not None:
             raise RuntimeError(
                 "To compute exact expectation values, (i) the device name must be "
-                "\"wavefunction-simulator\" and (ii) n_samples must be None. The device "
+                '"wavefunction-simulator" and (ii) n_samples must be None. The device '
                 f"name is currently {self.device_name} and n_samples is {self.n_samples}."
             )
-        cxn = get_forest_connection(self.device_name)
+        cxn = get_forest_connection(self.device_name, self.seed)
 
         # Pyquil does not support PauliSums with no terms.
         if len(qubit_operator.terms) == 0:
@@ -112,7 +113,7 @@ class ForestSimulator(QuantumSimulator):
         return wavefunction
 
 
-def get_forest_connection(device_name: str):
+def get_forest_connection(device_name: str, seed=None):
     """Get a connection to a forest backend
 
     Args:
@@ -122,6 +123,6 @@ def get_forest_connection(device_name: str):
         A connection to either a pyquil simulator or a QPU
     """
     if device_name == "wavefunction-simulator":
-        return WavefunctionSimulator()
+        return WavefunctionSimulator(random_seed=seed)
     else:
         return get_qc(device_name)
