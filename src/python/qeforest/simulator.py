@@ -63,7 +63,7 @@ class ForestSimulator(QuantumSimulator):
         if n_samples is None:
             n_samples = self.n_samples
         super().run_circuit_and_measure(circuit)
-        cxn = get_forest_connection(self.device_name)
+        cxn = get_forest_connection(self.device_name, self.seed)
         bitstrings = cxn.run_and_measure(export_to_pyquil(circuit), trials=n_samples)
         if isinstance(bitstrings, dict):
             bitstrings = np.vstack([bitstrings[q] for q in sorted(cxn.qubits())]).T
@@ -108,7 +108,7 @@ class ForestSimulator(QuantumSimulator):
     )
     def get_wavefunction(self, circuit):
         super().get_wavefunction(circuit)
-        cxn = get_forest_connection(self.device_name)
+        cxn = get_forest_connection(self.device_name, self.seed)
         wavefunction = cxn.wavefunction(export_to_pyquil(circuit))
         return wavefunction
 
