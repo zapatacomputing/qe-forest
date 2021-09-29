@@ -4,10 +4,10 @@ import subprocess
 
 import numpy as np
 from pyquil.api import WavefunctionSimulator, get_qc
-from zquantum.core.circuits import Circuit, export_to_pyquil
+from zquantum.core.circuits import Circuit
 from zquantum.core.interfaces.backend import QuantumSimulator
 from zquantum.core.measurement import ExpectationValues, Measurements
-from zquantum.core.openfermion import qubitop_to_pyquilpauli
+from qeforest.conversions import export_to_pyquil, qubitop_to_pyquilpauli
 
 
 class ForestSimulator(QuantumSimulator):
