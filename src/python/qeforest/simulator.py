@@ -4,10 +4,11 @@ import subprocess
 
 import numpy as np
 from pyquil.api import WavefunctionSimulator, get_qc
-from zquantum.core.circuits import Circuit
-from zquantum.core.interfaces.backend import QuantumSimulator
-from zquantum.core.measurement import ExpectationValues, Measurements
 from qeforest.conversions import export_to_pyquil, qubitop_to_pyquilpauli
+from zquantum.core.circuits import Circuit
+from zquantum.core.interfaces.backend import QuantumSimulator, StateVector
+from zquantum.core.measurement import ExpectationValues, Measurements
+from zquantum.core.wavefunction import flip_amplitudes
 
 
 class ForestSimulator(QuantumSimulator):
@@ -88,11 +89,19 @@ class ForestSimulator(QuantumSimulator):
             )
         return ExpectationValues(expectation_values)
 
-    def get_wavefunction(self, circuit):
-        super().get_wavefunction(circuit)
+    def _get_wavefunction_from_native_circuit(
+        self, circuit: Circuit, initial_state: StateVector
+    ) -> StateVector:
+        if not np.array_equal(initial_state, [1] + [0] * (len(initial_state) - 1)):
+            raise ValueError(
+                "ForestSimulator does not support starting simulations from state "
+                "other than |0>. In particular, it currently does not support "
+                "non-native circuit components."
+            )
+
         cxn = get_forest_connection(self.device_name, self.seed)
         wavefunction = cxn.wavefunction(export_to_pyquil(circuit))
-        return wavefunction
+        return flip_amplitudes(wavefunction.amplitudes)
 
 
 def get_forest_connection(device_name: str, seed=None):
