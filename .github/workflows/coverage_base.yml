@@ -17,6 +17,8 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    container:
+      image: zapatacomputing/z-quantum-default:latest
     runs-on: ubuntu-latest
 
     steps:
