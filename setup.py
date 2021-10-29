@@ -1,5 +1,4 @@
 import warnings
-
 import setuptools
 
 try:
