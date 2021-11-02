@@ -48,7 +48,14 @@ jobs:
         run: |
           qvm -S &
           quilc -S &
+          make github_actions
+          make coverage
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
-      - uses: ./subtrees/z_quantum_actions/actions/coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
-          codecov_secret: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: trueyml
