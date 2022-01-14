@@ -1,5 +1,4 @@
 import pytest
-
 from qeforest.simulator import kill_subprocesses
 
 
