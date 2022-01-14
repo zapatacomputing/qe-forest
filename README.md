@@ -24,7 +24,7 @@ Finally, close the two previous terminals and open a third terminal. Navigate to
 
 ## QVM and QUILC
 
-For ease of use, qe-forest automatically starts QVM and QUILCS every time a ForestSimulator object is created so long as the ports are free. If a ForestSimulator object is created while the ports for QVM or QUILC are being used, then a warning will be produced saying that a process is already running at the specified port. In principle, it is ok to make a new `ForestSimulator` while another is already using the ports. However, it is good practice to end the QVM and QUILC processes by running `simulator.kill_processes()` when you are done running a simulation.
+For ease of use, qe-forest automatically starts QVM and QUILCS every time a ForestSimulator object is created so long as the ports 5000 an 5555 are free. If a ForestSimulator object is created while the ports for QVM or QUILC are being used, then a warning will be produced saying that a process is already running at the specified port. In principle, it is ok to make a new `ForestSimulator` while another is already using the ports. However, it is good practice to end the QVM and QUILC processes by running `simulator.kill_processes()` when you are done running a simulation.
 
 ## Development and contribution
 
