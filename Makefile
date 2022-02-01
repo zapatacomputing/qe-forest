@@ -10,5 +10,5 @@ coverage:
 		--cov=src \
 		--cov-fail-under=$(MIN_COVERAGE) tests \
 		--no-cov-on-fail \
-		--cov-report term-missing \
+		--cov-report xml \
 		&& echo Code coverage Passed the $(MIN_COVERAGE)% mark!
