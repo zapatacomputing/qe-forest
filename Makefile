@@ -12,6 +12,8 @@ coverage:
 		&& echo Code coverage Passed the $(MIN_COVERAGE)% mark!
 
 github_actions-default:
+	apt-get update
+	apt-get install python3.7-venv
 	python3 -m venv ${VENV} && \
 		${VENV}/bin/python3 -m pip install --upgrade pip && \
 		${VENV}/bin/python3 -m pip install ./z-quantum-core && \
