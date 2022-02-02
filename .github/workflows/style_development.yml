@@ -14,6 +14,8 @@ on:
 
 jobs:
   build:
+    container:
+      image: zapatacomputing/z-quantum-default:latest
     runs-on: ubuntu-latest
 
     steps:
