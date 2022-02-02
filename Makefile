@@ -16,7 +16,7 @@ github_actions-default:
 	apt-get install -y python3.7-venv
 
 	# For some reason, having numpy installed globally makes mypy fail.
-	python3 -m pip uninstall numpy
+	python3 -m pip uninstall -y numpy
 
 	python3 -m venv ${VENV} && \
 		${VENV}/bin/python3 -m pip install --upgrade pip && \
@@ -24,5 +24,5 @@ github_actions-default:
 		${VENV}/bin/python3 -m pip install -e '.[develop]'
 
 	# For some reason, mypy fails unless we re-install ruamel.yaml.
-	${VENV}/bin/python3 -m pip uninstall ruaml.yaml
-	${VENV}/bin/python3 -m pip install ruaml.yaml
+	${VENV}/bin/python3 -m pip uninstall -y ruaml.yaml
+	${VENV}/bin/python3 -m pip install -y ruaml.yaml
