@@ -24,5 +24,5 @@ github_actions-default:
 		${VENV}/bin/python3 -m pip install -e '.[develop]'
 
 	# For some reason, mypy fails unless we re-install ruamel.yaml.
-	${VENV}/bin/python3 -m pip uninstall -y ruaml.yaml
-	${VENV}/bin/python3 -m pip install ruaml.yaml
+	${VENV}/bin/python3 -m pip uninstall -y ruamel.yaml
+	${VENV}/bin/python3 -m pip install ruamel.yaml
