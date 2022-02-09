@@ -13,6 +13,7 @@ module = [
     'openfermion.*',
     'pyquil.*',
     'sympy',
+    'zquantum.*',
 ]
 ignore_missing_imports = true
 
