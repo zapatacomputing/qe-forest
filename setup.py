@@ -37,4 +37,6 @@ setuptools.setup(
         "pyquil~=2.25",
     ],
     extras_require=extras,
+    zip_safe=False,
+    package_data={"src/python": ["py.typed"]},
 )
