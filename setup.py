@@ -39,4 +39,5 @@ setuptools.setup(
     extras_require=extras,
     zip_safe=False,
     package_data={"src/python": ["py.typed"]},
+    include_package_data=True,
 )
