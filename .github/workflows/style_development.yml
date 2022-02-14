@@ -14,6 +14,8 @@ on:
 
 jobs:
   build:
+    container:
+      image: zapatacomputing/z-quantum-default:latest
     runs-on: ubuntu-latest
 
     steps:
@@ -33,11 +35,6 @@ jobs:
           repository: zapatacomputing/z-quantum-core
           path: z-quantum-core
           ref: dev
-
-      - name: Install z-quantum-core
-        run: |
-          python3 -m pip install --user ./z-quantum-core
-
 
       # Pull in the style includes
       - uses: ./subtrees/z_quantum_actions/actions/style

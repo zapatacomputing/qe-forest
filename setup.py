@@ -1,4 +1,7 @@
+import site
+import sys
 import warnings
+
 import setuptools
 
 try:
@@ -6,6 +9,9 @@ try:
 except ImportError:
     warnings.warn("Unable to import extras")
     extras = {}
+
+# Workaound for https://github.com/pypa/pip/issues/7953
+site.ENABLE_USER_SITE = "--user" in sys.argv[1:]
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -31,4 +37,7 @@ setuptools.setup(
         "pyquil~=2.25",
     ],
     extras_require=extras,
+    zip_safe=False,
+    package_data={"src/python": ["py.typed"]},
+    include_package_data=True,
 )
