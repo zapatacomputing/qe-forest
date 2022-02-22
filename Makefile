@@ -19,10 +19,10 @@ github_actions-default:
 	python3 -m pip uninstall -y numpy
 
 	python3 -m venv ${VENV} && \
-		$(PYTHON) -m pip install --upgrade pip && \
-		$(PYTHON) -m pip install ./z-quantum-core && \
-		$(PYTHON) -m pip install -e '.[develop]'
+		${VENV}/bin/python3 -m pip install --upgrade pip && \
+		${VENV}/bin/python3 -m pip install ./z-quantum-core && \
+		${VENV}/bin/python3 -m pip install -e '.[develop]'
 
 	# For some reason, mypy fails unless we re-install ruamel.yaml.
-	$(PYTHON) -m pip uninstall -y ruamel.yaml
-	$(PYTHON) -m pip install ruamel.yaml
+	${VENV}/bin/python3 -m pip uninstall -y ruamel.yaml
+	${VENV}/bin/python3 -m pip install ruamel.yaml
