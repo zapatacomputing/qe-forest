@@ -25,13 +25,13 @@ jobs:
       matrix:
         python: [3.7, "3.10"]
 
-    name: Python ${{ matrix.python }}
+    name: Style - Python ${{ matrix.python }}
 
     steps:
       - uses: actions/checkout@v2
 
       # ------------------------------------------------------------------------
-      # Loads private SSH key to the SSH agent. Allows to install dependencies 
+      # Loads private SSH key to the SSH agent. Allows to install dependencies
       # from private git repos, but requires setting `secrets.SSH_PRIVATE_KEY`
       # in repo settings.
       # ------------------------------------------------------------------------
