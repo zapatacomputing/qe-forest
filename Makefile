@@ -26,3 +26,6 @@ github_actions-default:
 	# For some reason, mypy fails unless we re-install ruamel.yaml.
 	${VENV}/bin/python3 -m pip uninstall -y ruamel.yaml
 	${VENV}/bin/python3 -m pip install ruamel.yaml
+
+build-system-deps:
+	$(PYTHON) -m pip install setuptools wheel "setuptools_scm>=6.0"
