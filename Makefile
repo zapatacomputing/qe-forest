@@ -13,7 +13,7 @@ coverage:
 
 github_actions-default:
 	apt-get update
-	apt-get install -y python3.7-venv
+	apt-get install -y python3.8-venv
 
 	# For some reason, having numpy installed globally makes mypy fail.
 	python3 -m pip uninstall -y numpy
